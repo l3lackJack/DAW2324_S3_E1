@@ -34,41 +34,54 @@
 
 </head>
 <?php include 'navbar.php'; ?>
+
 <body>
-   
+
 
     <!-- PROMPT INPUT -->
     <div class="container">
         <div class="my-3">
-            <form method="post" action="/Controladors/imageController.php" class="row row-cols-lg-auto g-3 align-items-center">
+            <form method="post" action="/Controladors/imageController.php"
+                class="row row-cols-lg-auto g-3 align-items-center">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="promptText" id="promptText" placeholder="Enter the topic here">
-                    <button disabled name="promptButton" id="promptButton" type="submit" class="btn btn-success">Submit</button>
+                    <input type="text" class="form-control" name="promptText" id="promptText"
+                        placeholder="Enter the topic here">
+                    <button disabled name="promptButton" id="promptButton" type="submit"
+                        class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>
 
         <hr>
 
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExample" class="carousel" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <a href="/Vistes/imageChoose.php">
-                        <img src="../img/valentinesDay.jpg" class="d-block mx-auto img-fluid h-20" alt="Imagen 1">
-                    </a>
+                    <form action="/Controladors/imageController.php" method="POST">
+                        <input type="hidden" name="promptText" value="A photo of valentines day">
+                        <button type="submit" name="promptButton" id="promptButton" class="btn p-0 border-0 bg-transparent w-100">
+                            <img src="../img/valentinesDay.jpg" class="d-block mx-auto img-fluid" alt="Imagen 1">
+                        </button>
+                    </form>
                 </div>
                 <div class="carousel-item">
-                    <a href="/Vistes/imageChoose.php">
-                        <img src="../img/halloween.png" class="d-block mx-auto img-fluid h-20" alt="Imagen 2">
-                    </a>
+                    <form action="/Controladors/imageController.php" method="POST">
+                        <input type="hidden" name="promptText" value="A photo of halloween">
+                        <button type="submit" name="promptButton" id="promptButton" class="btn p-0 border-0 bg-transparent w-100">
+                            <img src="../img/halloween.png" class="d-block mx-auto img-fluid" alt="Imagen 2">
+                        </button>
+                    </form>
                 </div>
                 <div class="carousel-item">
-                    <a href="/Vistes/imageChoose.php">
-                        <img src="../img/mothersDay.jpg" class="d-block mx-auto img-fluid h-20" alt="Imagen 3">
-                    </a>
+                    <form action="/Controladors/imageController.php" method="POST">
+                        <input type="hidden" name="promptText" value="A photo of mother's day">
+                        <button type="submit" name="promptButton" id="promptButton" class="btn p-0 border-0 bg-transparent w-100">
+                            <img src="../img/mothersDay.jpg" class="d-block mx-auto img-fluid" alt="Imagen 3">
+                        </button>
+                    </form>
                 </div>
-                <!-- Agrega más elementos .carousel-item para más imágenes -->
             </div>
+
             <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -78,7 +91,6 @@
                 <span class="visually-hidden">Next</span>
             </a>
         </div>
-
 
     </div>
 
@@ -97,7 +109,7 @@
                 submitButton.setAttribute('disabled', true);
             }
         });
-        
+
 
 
 
