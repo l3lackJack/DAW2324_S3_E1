@@ -105,8 +105,9 @@ $mostrarSoloInicioSesion = false;
                 <label for="ccontraseña" class="form-label">Confirmar Contraseña</label>
                 <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="Escriba su contraseña de nuevo">
             </div>
-
+            <div class="text-center">
             <button type="submit" class="btn btn-primary">Crear cuenta</button>
+            </div>
         </form>
     </div>
     </main>
