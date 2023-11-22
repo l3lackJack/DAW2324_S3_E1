@@ -6,3 +6,12 @@
   .icon-hover:hover i {
     color: #3b71ca !important;
   }
+
+
+  .containerProducto {
+    border-radius: 10px;
+    overflow: hidden;
+    overflow: hidden;
+    box-shadow: 3px 4px 15px #00000026;
+    margin-bottom: 20px;
+}

@@ -9,38 +9,24 @@ class Product {
         $this->conn = $database->connect();
     }
 
-    public function obtenirPreu($productId) {
-        $sql = "SELECT sell_price FROM products WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $productId);
-        $stmt->execute();
 
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // public function obtenerUno($productId) {
+    //     $sql = "SELECT name FROM productos WHERE id = :id";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->bindParam(':id', $productId);
+    //     $stmt->execute();
+
+    //     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        if ($resultado) {
-            return $resultado;
-        } else {
-            return null;
-        }
-    }
-
-    public function obtenirName($productId) {
-        $sql = "SELECT name FROM products WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $productId);
-        $stmt->execute();
-
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        if ($resultado) {
-            return $resultado;
-        } else {
-            return null;
-        }
-    }   
+    //     if ($resultado) {
+    //         return $resultado;
+    //     } else {
+    //         return null;
+    //     }
+    // }   
     
-    public function obtenirTots () {
-        $sql = "SELECT * FROM products";
+    public function obtenerTodos () {
+        $sql = "SELECT p.name,p.price, i.thumb FROM productos as p, imagenes as i where p.id = i.producto_id GROUP by p.name";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
@@ -49,39 +35,15 @@ class Product {
         if ($resultado) {
             return $resultado;
         } else {
-            return null;
+            return "Algo ha salido mal...";
         }
     }
 
-    public function obtenirProducteImagens () {
-        $sql = "SELECT products.id, products.sell_price, products.name, productImages.nom
-                FROM products 
-                LEFT JOIN productImages ON productImages.product_id =  products.id and productImages.nom LIKE '%ima1.%'";  
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+    
 
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        if ($resultado) {
-            return $resultado;
-        } else {
-            return null;
-        }
+    public function printArray($array){
+        echo '<pre>'; print_r($array); echo '</pre>';
     }
 
-    public function obtenerNomImagens($productId) {
-        $sql = "SELECT nom FROM productImages WHERE product_id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $productId);
-        $stmt->execute();
-
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        if ($resultado) {
-            return $resultado;
-        } else {
-            return null;
-        }
-    }
-
+    
 }
