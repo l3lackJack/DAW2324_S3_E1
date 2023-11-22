@@ -17,7 +17,7 @@ session_start();
         }
 
         .zoom:hover {
-            transform: scale(1.05);
+            transform: scale(1.07);
             /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
     </style>
@@ -31,12 +31,11 @@ session_start();
     <section class="text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Prompt Result</h1>
-                <p class="lead text-body-secondary">Choose an image</p>
-                <!-- <p>
-                    <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                    <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                </p> -->
+                <h1 class="fw-light">Choose an image</h1>
+                <p class="lead text-body-secondary">or</p>
+                <form method="post" action="/Controladors/imageController.php">
+                    <button type="submit" name="tryAgainChoose" class="btn btn-secondary my-2">Try again</button>
+                </p>
             </div>
         </div>
     </section>
@@ -61,15 +60,7 @@ session_start();
         </div>
     </div>
 
-
-
-
-
-
     <?php include './footer.php'; ?>
 </body>
-
-
-
 
 </html>

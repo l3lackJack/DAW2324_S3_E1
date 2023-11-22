@@ -26,11 +26,13 @@ if (isset($_POST['promptButton'])) {
     if ($result === false) {
         echo 'Error';
     } else {
+        $_SESSION['imagesUrls'] = [];
         $_SESSION['imagesUrls'] = json_decode($result, true);
     }
 
     header("Location: /Vistes/imageChoose.php");
 }
+
 
 if(isset($_POST['saveButton'])) {
     var_dump(1);
@@ -40,5 +42,9 @@ if(isset($_POST['saveButton'])) {
 if (isset($_POST['resetButton'])) {
     unset($_SESSION['promptList']);
     unset($_SESSION['imagesUrls']);
+    header("Location: /Vistes/imagePrompt.php");
+}
+
+if (isset($_POST['tryAgainChoose'])){
     header("Location: /Vistes/imagePrompt.php");
 }

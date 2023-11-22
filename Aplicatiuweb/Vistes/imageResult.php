@@ -35,7 +35,13 @@ session_start();
                 <form class="mt-2" method="post" action="/Controladors/imageController.php">
                     <button name="resetButton" id="resetButton" type="submit" href="/Vistes/imagePrompt.php"
                         class="btn btn-secondary mx-3">Reset Process</button>
-                    <button type="submit" name="saveButton" class="btn btn-primary">Save</button>
+                        <?php
+                        if (isset($_SESSION['usuario_id'])) {
+                            echo '<button name="saveButton" id="saveButton" type="submit" class="btn btn-primary">Save</button>';
+                        }else {
+                            echo '<button name="saveButton" id="saveButton" type="submit" class="btn btn-primary">LogIn & Save</button>';
+                        }
+                        ?>
                     </p>
             </div>
         </div>
