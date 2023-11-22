@@ -84,8 +84,8 @@ $mostrarSoloInicioSesion = false;
     <!-- element que mostra els missatges d'error per defecete esta en display none per a que no es veigui --> 
     <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
     <main class="container d-flex justify-content-center">
-    <div class="my-5">
-        <h1>Crear cuenta</h1>
+    <div class="shadow p-4 mb-5 bg-body rounded mt-5 my-5">
+        <h1 class="text-center">Crear cuenta</h1>
 
         <!-- Formulario -->
         <form method="post" action="/Controladors/procesar_registre.php" id="registre-form" onsubmit="return validarFormulari()">

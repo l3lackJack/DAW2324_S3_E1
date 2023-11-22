@@ -50,8 +50,8 @@ $mostrarSoloInicioSesion = true;
         <?php echo isset($_GET['error']) ? 'Usuario o contraseña incorrectos.' : ''; ?>
     </div>
     <main class="container d-flex justify-content-center ">
-    <div class="mt-5">
-        <h1>Iniciar Sesión</h1>
+    <div class="shadow p-4 mb-5 bg-body rounded mt-5">
+        <h1 class="text-center">Iniciar Sesión</h1>
 
         <!-- Formulario de Inicio de Sesión -->
         <form method="post" action="/Controladors/procesar_login.php" onsubmit="return validarInicioSesion()"> <!-- validació dels camps gràcies al script anterior -->
