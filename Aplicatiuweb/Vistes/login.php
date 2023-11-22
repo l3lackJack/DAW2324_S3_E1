@@ -4,7 +4,9 @@ if(isset($_SESSION['usuario_nombre'])) {
     // La sesión está iniciada, redirigir a la página de perfil o a la página que desees
     header("Location: /Vistes/perfil.php");
     exit();
-}?>
+}
+$mostrarSoloInicioSesion = true;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,14 +49,15 @@ if(isset($_SESSION['usuario_nombre'])) {
     <div id="mensaje-error" class="alert alert-danger" style="display: <?php echo isset($_GET['error']) ? 'block' : 'none'; ?>;">
         <?php echo isset($_GET['error']) ? 'Usuario o contraseña incorrectos.' : ''; ?>
     </div>
-    <div class="container mt-5">
+    <main class="container d-flex justify-content-center ">
+    <div class="mt-5">
         <h1>Iniciar Sesión</h1>
 
         <!-- Formulario de Inicio de Sesión -->
         <form method="post" action="/Controladors/procesar_login.php" onsubmit="return validarInicioSesion()"> <!-- validació dels camps gràcies al script anterior -->
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
+                <input type="email" class="form-control"id="email" name="email" placeholder="nombre@ejemplo.com">
             </div>
             <div class="mb-3">
                 <label for="contrasena" class="form-label">Contraseña</label>
@@ -65,6 +68,7 @@ if(isset($_SESSION['usuario_nombre'])) {
             <a href="registre.php" class="btn btn-secondary">Registrarse</a>
         </form>
     </div>
+    </main>
     
     <?php include 'footer.php'; ?>
 </body>

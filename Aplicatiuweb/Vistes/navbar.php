@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- incloir tots els elements del head en el navbar aixi al fer l'include a les altres pagines totes tindran el mateix -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Vision</title>
-
-    <!-- Busqueda de bootstrap (descarregat) no desde el cdn-->
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
@@ -26,29 +24,33 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/Vistes/imagePrompt.php">Generar Imagen</a>
                     </li>
-                    
+
+                    <?php
+                    // Verificar si la variable $mostrarSoloInicioSesion está definida y es verdadera
+                    $mostrarSoloInicioSesion = isset($mostrarSoloInicioSesion) && $mostrarSoloInicioSesion;
+                    ?>
+
                     <li class="nav-item position-absolute end-0 me-5" id="registre-li">
-                        <a class="nav-link text-white" href="/Vistes/login.php">Iniciar Sesión</a>
+                        <a class="nav-link text-white" href="/Vistes/login.php" <?php if ($mostrarSoloInicioSesion) echo 'style="display: none"'; ?>>Iniciar Sesión o Registrarse</a>
                     </li>
-                   
+                    <li class="nav-item position-absolute end-0 me-5" id="registre-li">
+                        <a class="nav-link text-white" href="/Vistes/login.php" <?php if (!$mostrarSoloInicioSesion) echo 'style="display: none"'; ?>>Registrarse</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Busqueda de jquery per usar a javascript i busqueda del bootstrap (descarregat) -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <?php 
-    //comprovar si l'usuari ha iniciat sessió, en cas afirmatiu logedin es fica amb true i desapareixerà de la capçalera el botó inciar sessión
+    <?php
     if (!isset($_SESSION['loggedin'])){
         $_SESSION['loggedin'] = false;
     }
     elseif ($_SESSION['loggedin']) {
         echo '<script>var sesionIniciada = true;</script>';
-    } 
+    }
     ?>
     <script src="../javascript/sessio.js"></script>
-
 </body>
 
 </html>
