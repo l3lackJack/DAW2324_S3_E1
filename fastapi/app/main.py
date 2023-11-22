@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import os
 from fastapi import Form
 from fastapi.middleware.cors import CORSMiddleware
+from openai import OpenAI
 from pydantic import BaseModel
 # Carregar les variables d'entorn des de l'arxiu .env
 load_dotenv()
