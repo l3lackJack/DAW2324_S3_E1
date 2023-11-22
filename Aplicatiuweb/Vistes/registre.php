@@ -84,7 +84,7 @@ $mostrarSoloInicioSesion = false;
     <!-- element que mostra els missatges d'error per defecete esta en display none per a que no es veigui --> 
     <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
     <main class="container d-flex justify-content-center">
-    <div class="mt-5">
+    <div class="my-5">
         <h1>Crear cuenta</h1>
 
         <!-- Formulario -->
@@ -107,7 +107,6 @@ $mostrarSoloInicioSesion = false;
             </div>
 
             <button type="submit" class="btn btn-primary">Crear cuenta</button>
-            <a href="login.php" class="btn btn-secondary">Iniciar sesión</a>
         </form>
     </div>
     </main>
