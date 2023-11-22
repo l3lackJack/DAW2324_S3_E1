@@ -31,7 +31,7 @@
                     ?>
 
                     <li class="nav-item position-absolute end-0 me-5" id="registre-li">
-                        <a class="nav-link text-white" href="/Vistes/login.php" <?php if ($mostrarSoloInicioSesion) echo 'style="display: none"'; ?>>Iniciar Sesión o Registrarse</a>
+                        <a class="nav-link text-white" href="/Vistes/login.php" <?php if ($mostrarSoloInicioSesion) echo 'style="display: none"'; ?>>Iniciar Sesión</a>
                     </li>
                     <li class="nav-item position-absolute end-0 me-5" id="registre-li">
                         <a class="nav-link text-white" href="/Vistes/login.php" <?php if (!$mostrarSoloInicioSesion) echo 'style="display: none"'; ?>>Registrarse</a>

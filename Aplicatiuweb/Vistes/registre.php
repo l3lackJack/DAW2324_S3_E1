@@ -4,7 +4,9 @@ if(isset($_SESSION['usuario_nombre'])) {
     // La sesión está iniciada, redirigir a la página de perfil 
     header("Location: /Vistes/perfil.php");
     exit();
-}?>
+}
+$mostrarSoloInicioSesion = false;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,8 +82,9 @@ if(isset($_SESSION['usuario_nombre'])) {
 
 <body>
     <!-- element que mostra els missatges d'error per defecete esta en display none per a que no es veigui --> 
-    <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>  
-    <div class="container mt-5">
+    <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
+    <main class="container d-flex justify-content-center">
+    <div class="mt-5">
         <h1>Crear cuenta</h1>
 
         <!-- Formulario -->
@@ -107,6 +110,7 @@ if(isset($_SESSION['usuario_nombre'])) {
             <a href="login.php" class="btn btn-secondary">Iniciar sesión</a>
         </form>
     </div>
+    </main>
 
     <?php include 'footer.php'; ?>
 
