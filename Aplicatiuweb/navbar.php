@@ -27,11 +27,8 @@
                         <a class="nav-link text-white" href="/Vistes/imagePrompt.php">Generar Imagen</a>
                     </li>
                     <li class="nav-item" id="registre-li">
-<<<<<<< HEAD
                         <a class="nav-link text-white position-absolute end-0 me-5" href="/registre.php">Registro</a>
-=======
                         <a class="nav-link text-white position-absolute end-0 me-5" href="/Vistes/registre.php">Registro</a>
->>>>>>> main
                     </li>
                 </ul>
             </div>
