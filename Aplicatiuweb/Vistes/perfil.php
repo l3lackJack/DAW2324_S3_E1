@@ -53,6 +53,13 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
     <div class="row">
         <div class="col">
         <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <label for="profileImage">Selecciona una nueva foto de perfil:</label>
+                <input type="file" name="profileImage" id="profileImage" accept="image/*">
+                <input type="submit" value="Actualizar Foto de Perfil">
+            </form>
+            <!-- Mostrar la imagen actual del perfil -->
+            <img src="mostrar_imagen.php" alt="Foto de perfil">
         <p>ID de Usuario: <?php echo htmlspecialchars($_SESSION['usuario_id'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
         </div> 
