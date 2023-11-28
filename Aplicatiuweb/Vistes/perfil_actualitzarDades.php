@@ -95,9 +95,36 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
         &nbsp;&nbsp;&nbsp;Mis pedidos
         </a>
       </li>
+      <li>
+      <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
+      <button type="submit" id="cerrar_sesion" name="cerrar_sesion" class="btn btn-secondary">Cerrar Sesión</button>
+      </form>
+    </li>
     </ul>
   </div>
-        
+        <div class="col m-4">
+        <main class="container d-flex justify-content-center ">
+    <div class="shadow p-4 mb-5 bg-body rounded mt-5">
+  <!-- Formulario de actualización -->
+        <h2>Actualizar Datos</h2>
+        <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()"> <!-- en enviar formulari realitzar el script de validació -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label> 
+                <!-- evitar inserció codi -->
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>">  
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?>">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="btn btn-danger end-0 me-5">Borrar Cuenta</button>
+
+            <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
+        </form>
+    </div>
+        </main>
+        </div>
     </div>
     </div>
 

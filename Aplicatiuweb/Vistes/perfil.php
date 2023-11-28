@@ -95,6 +95,11 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
         &nbsp;&nbsp;&nbsp;Mis pedidos
         </a>
       </li>
+      <li>
+      <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
+      <button type="submit" id="cerrar_sesion" name="cerrar_sesion" class="btn btn-secondary">Cerrar Sesión</button>
+      </form>
+    </li>
     </ul>
   </div>
         
