@@ -104,7 +104,7 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
   </div>
         <div class="col m-4">
         <main class="container d-flex justify-content-center ">
-    <div class="shadow p-4 mb-5 bg-body rounded mt-5">
+    <div class="shadow p-4 px-5 mb-5 bg-body rounded mt-5">
   <!-- Formulario de actualización -->
         <h2>Actualizar Datos</h2>
         <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()"> <!-- en enviar formulari realitzar el script de validació -->
@@ -122,6 +122,12 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
 
             <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
         </form>
+        <br>
+        <h3>Cambia tu foto de perfil</h3>
+        <form action="procesar_subida.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="imagen" accept="image/*">
+    <br><button class="btn btn-primary mt-2" type="submit" value="Subir Imagen">Subir Imagen</button>
+</form>
     </div>
         </main>
         </div>
