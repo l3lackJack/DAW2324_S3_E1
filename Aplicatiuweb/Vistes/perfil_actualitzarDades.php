@@ -124,7 +124,7 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
         </form>
         <br>
         <h3>Cambia tu foto de perfil</h3>
-        <form action="procesar_subida.php" method="post" enctype="multipart/form-data">
+        <form action="/Controladors/processar_pujadaFotos.php" method="post" enctype="multipart/form-data">
     <input type="file" name="imagen" accept="image/*">
     <br><button class="btn btn-primary mt-2" type="submit" value="Subir Imagen">Subir Imagen</button>
 </form>
