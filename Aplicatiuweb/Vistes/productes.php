@@ -45,8 +45,8 @@
                         <form action="../Controladors/producteControl.php?id=<?php echo $datos[$i]['id'] ?>"
                             method="post">
 
-                            <div class="part-1">
-                                <img src="<?= $datos[$i]['thumb']; ?>" alt="">
+                            <div class="part-1" style="background-color:white;">
+                                <img src="<?= $datos[$i]['thumb']; ?>" alt="" style="text-align:center !important;display: flex;justify-content: center;align-items: center; width:100%;height:100%">
                             </div>
                             <div class="part-2" ">
                                 <h3 class="product-title" style="text-align:center;margin-top:20px;"><?= $datos[$i]['name']; ?></h3>
