@@ -43,8 +43,13 @@
                                     tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante
                                     suscipit non.
                                 </p>
-                                <form method="post" action="../Controladors/producteControl.php">
-                                    <input class="btn btn-primary" type="submit" name="botonSoporte" value="Select Support"/>
+                               
+
+                                <form method="post" action="/Controladors/imageController.php" class="row row-cols-lg-auto g-3 align-items-center">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="promptText" id="promptText" placeholder="Enter the topic here">
+                                        <button disabled  class="btn btn-primary" name="promptButton" id="promptButton" type="submit" class="btn btn-success">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -54,6 +59,24 @@
         </div>
 </div>
 
+<script>
+        const promptText = document.getElementById('promptText');
+        const submitButton = document.getElementById('promptButton');
+
+        promptText.addEventListener('input', () => {
+            event.preventDefault();
+            if (promptText.value.length > 3) {
+                submitButton.removeAttribute('disabled');
+            } else {
+                submitButton.setAttribute('disabled', true);
+            }
+        });
+        
+
+
+
+
+    </script>
 
 <?php include "footer.php" ?>
 
