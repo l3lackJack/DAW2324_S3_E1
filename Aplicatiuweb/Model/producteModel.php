@@ -12,7 +12,7 @@ class Product {
 
     
     public function obtenerTodos () {
-        $sql = "SELECT p.id, p.name,p.price, i.thumb FROM productos as p, imagenes as i where p.id = i.producto_id GROUP by p.name";
+        $sql = "SELECT p.id, p.name,p.price, i.thumb, i.original FROM productos as p, imagenes as i where p.id = i.producto_id GROUP by p.name";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 

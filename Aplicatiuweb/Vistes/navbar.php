@@ -8,6 +8,7 @@
     <!-- Busqueda de bootstrap (descarregat) no desde el cdn-->
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
 </head>
 
@@ -31,6 +32,10 @@
                     <li class="nav-item position-absolute end-0 me-5" id="registre-li">
                         <a class="nav-link text-white" href="/Vistes/login.php">Iniciar Sesión</a>
                     </li>
+                    <li class="nav-item position-absolute end-0 me-4 mt-2" id="">
+                    <a href=""><i class="fa-solid fa-cart-shopping" style="color:white"></i></a>
+                    </li>
+           
                    
                 </ul>
             </div>
