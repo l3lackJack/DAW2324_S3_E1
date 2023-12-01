@@ -41,20 +41,21 @@
                     $i = 0;
                     foreach ($datos as $dat) : ?>
                 <div class="col-md-6 col-lg-4 col-xl-3" id="product">
-                    <div id="product-1" class="single-product">
-                <form action="../Controladors/producteControl.php?id=<?php echo $datos[$i]['id'] ?>" method="post">
-                        
-                        <div class="part-1"> 
-                            <img src="<?= $datos[$i]['thumb']; ?>" alt="">
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title"><?= $datos[$i]['name']; ?></h3>
-                            <h4 class="product-price">$49.99</h4>
-                            <p>
-                            <input class="btn btn-primary" type="submit" value="Select">
-                            </p>
-                        </div>
-                </form>
+                    <div id="product-1" class="single-product" style="border-radius: 10px;overflow: hidden;overflow: hidden;box-shadow: 3px 4px 15px #00000026;margin-bottom: 20px;">
+                        <form action="../Controladors/producteControl.php?id=<?php echo $datos[$i]['id'] ?>"
+                            method="post">
+
+                            <div class="part-1">
+                                <img src="<?= $datos[$i]['thumb']; ?>" alt="">
+                            </div>
+                            <div class="part-2" ">
+                                <h3 class="product-title" style="text-align:center;margin-top:20px;"><?= $datos[$i]['name']; ?></h3>
+                                <!-- <p class="product-price" style="text-align:center;">$49.99</p> -->
+                                <p style="text-align: center;">
+                                    <input class="btn btn-primary" style="width:200px" type="submit" value="Select">
+                                </p>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
