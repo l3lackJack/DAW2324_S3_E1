@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Mover el archivo
         if (move_uploaded_file($archivo_temporal, $ruta_destino)) {
-            echo "¡La imagen se ha subido correctamente!";
-            header("Location: /perfil.php"); // Ajusta la ruta según tu estructura de archivos
+            header("Location: /Vistes/perfil.php?imagen=" . urlencode("/Controladors/img/fotos_perfil/" . basename($ruta_destino)));
+
             exit();
         } else {
             echo "Error al mover el archivo.";
