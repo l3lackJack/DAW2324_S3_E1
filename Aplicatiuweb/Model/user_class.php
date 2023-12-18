@@ -14,7 +14,7 @@ require_once "dataBaseCon.php";
 
     public function getAll() {
         
-        $query = 'SELECT * FROM users';
+        $query = 'SELECT * FROM clients';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
@@ -23,7 +23,7 @@ require_once "dataBaseCon.php";
 
     public function getById($id) {
 
-        $query = 'SELECT * FROM users WHERE id = :id';
+        $query = 'SELECT * FROM clients WHERE idClient = :id';
   
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -35,7 +35,7 @@ require_once "dataBaseCon.php";
    
     public function delete($id) {
         
-        $query = 'DELETE FROM users WHERE id = :id';
+        $query = 'DELETE FROM clients WHERE idClient = :id';
     
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -48,7 +48,7 @@ require_once "dataBaseCon.php";
     }
 
     public function recuperarInfoUsuari($email) {
-        $query = "SELECT id, username FROM users WHERE email = :email";
+        $query = "SELECT idClient, username FROM clients WHERE mail = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -64,7 +64,7 @@ require_once "dataBaseCon.php";
     public function registrarUsuario($nombre, $email, $contrasena) {
         $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
 
-        $query = 'INSERT INTO users (username, email, password) VALUES (:nombre, :email, :contrasena)';
+        $query = 'INSERT INTO clients (username, mail, password) VALUES (:nombre, :email, :contrasena)';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':email', $email);
@@ -79,7 +79,7 @@ require_once "dataBaseCon.php";
     }
 
     public function actualizarUsuario($id, $nombre, $email) {
-        $query = 'UPDATE users SET username = :nombre, email = :email WHERE id = :id';
+        $query = 'UPDATE clients SET username = :nombre, mail = :email WHERE idClient = :id';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':email', $email);
@@ -93,7 +93,7 @@ require_once "dataBaseCon.php";
     }
     
     public function loginar($email, $contrasena) {
-        $query = "SELECT id, username, password FROM users WHERE email = :email";
+        $query = "SELECT idClient, username, password FROM clients WHERE mail = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -106,7 +106,7 @@ require_once "dataBaseCon.php";
         }
     }
     public function borrarCuenta($email) {
-        $query = 'DELETE FROM users WHERE email = :email';
+        $query = 'DELETE FROM clients WHERE mail = :email';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
     

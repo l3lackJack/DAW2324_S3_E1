@@ -117,6 +117,7 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
                 <label for="email" class="form-label">Correo Electrónico</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?>">
             </div>
+            
             <button type="submit" class="btn btn-primary">Actualizar</button>
             <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="btn btn-danger end-0 me-5">Borrar Cuenta</button>
 

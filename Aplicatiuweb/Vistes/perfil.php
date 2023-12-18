@@ -103,12 +103,26 @@ if(!isset($_SESSION['usuario_nombre'])) { //en cas que no s'ha iniciat sessió e
     </ul>
   </div>
         
-        <div class="col m-4">
-        <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
-        <img src="<?php echo $ruta_imagen_nueva; ?>" alt="Nueva Foto de Perfil">
-        <p>ID de Usuario: <?php echo htmlspecialchars($_SESSION['usuario_id'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
-        </div> 
+  <div class="col m-4">
+    <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
+
+    <?php
+    // Verificar si la variable $_GET['imagen'] está definida
+    if (isset($_GET['imagen'])) {
+        $ruta_destino = htmlspecialchars(urldecode($_GET['imagen']), ENT_QUOTES, 'UTF-8');
+        // Comprobar si la imagen existe
+        echo '<img src="/Aplicatiuweb/img/fotos_perfil/' . basename($ruta_destino) . '" alt="Imagen de perfil" height="300" width="300">';
+
+    } else {
+        
+    }
+    ?>
+
+    <p>ID de Usuario: <?php echo htmlspecialchars($_SESSION['usuario_id'], ENT_QUOTES, 'UTF-8'); ?></p>
+    <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
+</div>
+
+
     </div>
     </div>
 
