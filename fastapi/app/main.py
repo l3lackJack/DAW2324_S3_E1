@@ -39,12 +39,12 @@ def obtener_productos():
     except requests.exceptions.RequestException as e:
         print(f"Error al hacer la solicitud a la API: {e}")
 
+
 # Función para insertar productos en la base de datos
 def insertar_en_base_de_datos(productos):
     try:
         # Conexión a la base de datos
         conn = mysql.connector.connect(
-            host="localhost",
             user="alumne",
             password="alumne1234",
             database="projectx")
@@ -63,14 +63,32 @@ def insertar_en_base_de_datos(productos):
                 )
         """)
 
+
         # Insertar productos en la tabla
         for producto in productos:
             cursor.execute("""
-                INSERT INTO productos (id, name, price, sku, type, variant, dpi)
+                INSERT INTO imagenes (id, id_producto, price, sku, type, variant, dpi)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (producto['nombre'], producto['name'], producto['price'], producto['sku'], producto['type'], producto['variant'], producto['dpi']))
 
-        # Confirmar los cambios y cerrar la conexión
+        # Confirmar los cambios
+        conn.commit()
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS imagenes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                producto_id INT
+                original VARCHAR(255),
+                thumb VARCHAR(255)
+                )
+        """)
+
+        for producto in productos:
+            cursor.execute("""
+                INSERT INTO imagenes (id, id_producto, original, thumb)
+                VALUES (?, ?, ?, ?)
+            """, (producto['images']['id'], producto['id'], producto['images']['thumb'], producto['images']['original']))
+        
         conn.commit()
         conn.close()
         print("Productos insertados en la base de datos con éxito.")
