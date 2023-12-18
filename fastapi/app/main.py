@@ -47,7 +47,8 @@ def insertar_en_base_de_datos(productos):
         conn = mysql.connector.connect(
             user="alumne",
             password="alumne1234",
-            database="projectx")
+            database="projectx"
+            )
         
         cursor = conn.cursor()
         # Crear tabla de productos (ajusta según la estructura de tus productos)
