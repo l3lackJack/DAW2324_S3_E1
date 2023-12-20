@@ -1,9 +1,8 @@
-# Importar los módulos necesarios
 from typing import Union
 import base64
 import requests
 from fastapi import FastAPI, Depends, HTTPException, status
-from jose import JWTError, jwt
+from jwt import jwt
 from fastapi.security import OAuth2PasswordBearer 
 from dotenv import load_dotenv
 import os
@@ -11,6 +10,7 @@ from fastapi import Form
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from pydantic import BaseModel
+
 # Carregar les variables d'entorn des de l'arxiu .env
 load_dotenv()
 
