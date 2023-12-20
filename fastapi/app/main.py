@@ -83,29 +83,32 @@ def insertar_en_base_de_datos(productos):
         print("Create correcto")
         # Insertar productos en la tabla
         for producto in productos['data']:
-            print(producto['id'], producto['name'], producto['sku'], producto['type'], producto['variants'], producto['dpi'])
             sql = "INSERT INTO productos(id, name, sku, type, variants, dpi) VALUES (%s, %s, %s, %s, %s, %s)"
             val = (producto['id'], producto['name'], producto['sku'], producto['type'], producto['variants'], producto['dpi'])
             cursor.execute(sql,val)
+       
+        print("Insert correcto")
 
         # Confirmar los cambios
         conn.commit()
 
-        # cursor.execute("""
-        #     CREATE TABLE IF NOT EXISTS imagenes (
-        #         id INTEGER PRIMARY KEY AUTO_INCREMENT,
-        #         producto_id INT
-        #         original VARCHAR(255),
-        #         thumb VARCHAR(255)
-        #         )
-        # """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS imagenes (
+                id INTEGER PRIMARY KEY,
+                producto_id INT,
+                original VARCHAR(255),
+                thumb VARCHAR(255)
+                )
+        """)
+        print("create2 correcto")
+        for producto in productos['data']:
+            sql = "INSERT INTO imagenes (id, producto_id, original, thumb) VALUES (%s, %s, %s, %s)"
+            val = (producto['images'][0]['id'], producto['id'], producto['images'][0]['thumb'], producto['images'][0]['original'])
+            cursor.execute(sql,val)
         
-        # for producto in productos:
-        #     cursor.execute("""
-        #         INSERT INTO imagenes (id, id_producto, original, thumb)
-        #         VALUES (?, ?, ?, ?)
-        #     """, (producto['images']['id'], producto['id'], producto['images']['thumb'], producto['images']['original']))
-        
+        print("insert2 correcto")
+        conn.commit()
+
         conn.close()
         print("Productos insertados en la base de datos con éxito.")
     except Exception as e:
