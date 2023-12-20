@@ -1,131 +1,150 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List
-import mysql.connector
+# Importar los módulos necesarios
+from typing import Union
+import base64
 import requests
+from fastapi import FastAPI, Depends, HTTPException, status
+from jose import JWTError, jwt
+from fastapi.security import OAuth2PasswordBearer 
+from dotenv import load_dotenv
+import os
+from fastapi import Form
+from fastapi.middleware.cors import CORSMiddleware
+from openai import OpenAI
+from pydantic import BaseModel
+# Carregar les variables d'entorn des de l'arxiu .env
+load_dotenv()
 
+# Configurar la URL de la API externa
+url = "https://api.picanova.com/api/beta"
 
-
+# Inicializar la aplicación FastAPI
 app = FastAPI()
 
-# Definir el modelo de datos para un producto
-class Image(BaseModel):
-    id: int
-    original: str
-    thumb: str
+origins = [
+    "http://php-apache:8003",
+]
 
-class Producto(BaseModel):
-    id: int
-    name: str
-    variants: int
-    sku: str
-    dpi: int
-    type: str
-    images: List[Image]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-    class Config:
-        orm_mode = True
+
+# Obtener las variables de entorno (definides al arxiu .env)
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+
+# Configurar el esquema de autenticación OAuth2 con contraseña
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# Definir las credenciales de la API externa (la de picanova) (també l'usem com a usuari y contrasenya propis, s'haurà de canviar)
+external_api_user = "virtual-vision"
+external_api_password = "2b8af5289aa93fc62eae989b4dcc9725"
+
+# Codificar las credenciales en Base64 para el encabezado de autorización que haremos a picanova
+encriptacio =  base64.b64encode(f"{external_api_user}:{external_api_password}".encode("utf-8")).decode("utf-8")
+headerspica = {
+    "Authorization": f"Basic {encriptacio}"
+}
+
+# Funciones auxiliares
+
+# Función para generar un token JWT
+def create_token(data: dict):
+    return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
+
+# Función para obtener el usuario actual a partir del token JWT 
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        # Decodificar el token y obtener la información del usuario
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except JWTError:
+        # Capturar errores relacionados con el token
+        raise credentials_exception
     
+# Función para verificar las credenciales de usuario (usuario propio)
+def verify_credentials(username: str, password: str):
+    return username == external_api_user and password == external_api_password
 
-
-api_url = "https://api.picanova.com/api/beta/products"
-usuario = "customaize"
-contrasena = "cfe994bf273c9d4eefcfc1c652e772ee"
-
-# Función para obtener productos de la API (simulada)
-def obtener_productos():
-    # Simular una lista de productos
+# Definir la ruta para autenticar y obtener un token (ruta per obtenir token) les probes s'han de realitzar amb postman
+@app.post("/token")
+def login(username: str = Form(...), password: str = Form(...)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     try:
-        # Hacer una solicitud GET a la API con autenticación básica
-        response = requests.get(api_url, auth=(usuario, contrasena))
-        response.raise_for_status()  # Lanza una excepción si la solicitud no fue exitosa
-
-        # Mostrar la respuesta en formato JSON
-        productos = response.json()
-        print("Datos recuperados de la API:")
-
-        return productos
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error al hacer la solicitud a la API: {e}")
-
-
-# Función para insertar productos en la base de datos
-def insertar_en_base_de_datos(productos):
-    try:
-        # Conexión a mula base de datos
-        conn = mysql.connector.connect(
-            user="alumne",
-            password="alumne1234",
-            database="projectx",
-            host = "localhost",
-            port = "3306"
-            )
-        print("Conexion correcta")
-
-        cursor = conn.cursor()
-
-        cursor.execute("""DROP TABLE IF EXISTS productos""")
-        cursor.execute("""DROP TABLE IF EXISTS imagenes""")
-        print("Eliminando tablas")
-        # Crear tabla de productos (ajusta según la estructura de tus productos)
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS productos (
-                id INTEGER PRIMARY KEY,
-                name VARCHAR(255) NULL,
-                price DOUBLE NULL,
-                sku VARCHAR(255) NULL,
-                type VARCHAR(255) NULL,
-                variants INTEGER NULL,
-                dpi INTEGER NULL
-                )
-        """)
-        print("Create correcto")
-        # Insertar productos en la tabla
-        for producto in productos['data']:
-            sql = "INSERT INTO productos(id, name, sku, type, variants, dpi) VALUES (%s, %s, %s, %s, %s, %s)"
-            val = (producto['id'], producto['name'], producto['sku'], producto['type'], producto['variants'], producto['dpi'])
-            cursor.execute(sql,val)
-       
-        print("Insert correcto")
-
-        # Confirmar los cambios
-        conn.commit()
-
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS imagenes (
-                id INTEGER PRIMARY KEY,
-                producto_id INT,
-                original VARCHAR(255),
-                thumb VARCHAR(255)
-                )
-        """)
-        print("create2 correcto")
-        for producto in productos['data']:
-            sql = "INSERT INTO imagenes (id, producto_id, original, thumb) VALUES (%s, %s, %s, %s)"
-            val = (producto['images'][0]['id'], producto['id'], producto['images'][0]['thumb'], producto['images'][0]['original'])
-            cursor.execute(sql,val)
-        
-        print("insert2 correcto")
-        conn.commit()
-
-        conn.close()
-        print("Productos insertados en la base de datos con éxito.")
+        # Verificar las credenciales proporcionadas
+        if verify_credentials(username, password):
+            # Credenciales válidas, generar un token
+            data = {"sub": username}
+            access_token = create_token(data)
+            return {"access_token": access_token, "token_type": "bearer"} #retornar token en cas que estigue correcte
+        else:
+            # Credenciales inválidas, lanzar una excepción
+            raise credentials_exception
     except Exception as e:
-        print(f"Error al insertar productos en la base de datos: {e}")
+        # Capturar otros errores
+        return {"message": f"Error: {str(e)}"}
 
-# Ruta para obtener productos de la API y luego insertarlos en la base de datos
-@app.get("/obtener_productos_y_guardar")
-def obtener_productos_y_guardar():
-    # Obtener productos de la API
-    productos = obtener_productos()
+# Definir la ruta para obtener productos (requiere autenticación)
+@app.get("/products")
+def get_products(current_user: dict = Depends(get_current_user)):
+    try:
+        # Realizar una solicitud a la API externa con el encabezado de autorización
+        response = requests.get(url + "/products", headers=headerspica)
+        
+        if response.status_code == 200:
+            # Si la solicitud es exitosa, devolver los productos
+            products = response.json()
+            return {"data": products}
+        else:
+            # Si la solicitud no es exitosa, devolver un mensaje de error
+            return {"message": f"Error al obtener productos. Código de estado: {response.status_code}"}
 
-    if productos:
-        # Insertar productos en la base de datos
-        insertar_en_base_de_datos(productos)
-        return {"mensaje": "Productos obtenidos de la API e insertados en la base de datos con éxito."}
-    else:
-        raise HTTPException(status_code=500, detail="Error al obtener productos de la API.")
+    except Exception as e:
+        # Capturar otros errores
+        return {"message": f"Error: {str(e)}"}
+    
+class RequestData(BaseModel):
+    topic: str
 
-# Puedes ejecutar la aplicación con el siguiente comando
-# uvicorn nombre_del_archivo:app --reload
+@app.post("/generateImages")
+async def generateImages(request_data: RequestData):
+    # API CALL
+    # load_dotenv()
+    # client = OpenAI()
+    # topic = request_data.topic
+    # response = client.images.generate(
+    #     prompt=topic,
+    #     n=3,
+    #     size="256x256"
+    # )
+
+    # API RESPONSE SIMULATION
+    response = {
+        "created": 1699298517,
+        "data": [
+            {
+                "url": "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699833600&semt=sph"
+            },
+            {
+                "url": "https://img.freepik.com/premium-photo/mountain-lake-with-mountain-background_931553-20878.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=sph"
+            },
+            {
+                "url": "https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_640.jpg"
+            }
+        ]
+    }
+
+    return response["data"]
