@@ -26,13 +26,13 @@
      
     ?>
 
-    <section class="section-products pt-3">
+<section id="homeProducts" class="section-products pt-3">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6 pt-2">
                     <div class="header">
-                        <!-- <h3>Featured Product</h3> -->
-                        <h2>Popular Products</h2>
+                        <h1 class="h1-center-black">Productos populares</h1>
+                        <p class="p-center-black">Explora nuestro catálogo hoy y da vida a tus pensamientos con arte personalizado. ¡Cada producto es una oportunidad para expresar tu creatividad única!</p>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <?php
                     $i = 0;
                     foreach ($datos as $dat) : ?>
-                <div class="col-md-6 col-lg-4 col-xl-3" id="product">
+                <div class="col-md-6 col-lg-4 col-xl-4" id="product">
                     <div id="product-1" class="single-product" style="border-radius: 10px;overflow: hidden;overflow: hidden;box-shadow: 3px 4px 15px #00000026;margin-bottom: 20px;">
                         <form action="../Controladors/producteControl.php?id=<?php echo $datos[$i]['id'] ?>"
                             method="post">
@@ -49,21 +49,17 @@
                                 <img src="<?= $datos[$i]['thumb']; ?>" alt="" style="text-align:center !important;display: flex;justify-content: center;align-items: center; width:100%;height:100%">
                             </div>
                             <div class="part-2" ">
-                                <h3 class="product-title" style="text-align:center;margin-top:20px;"><?= $datos[$i]['name']; ?></h3>
+                                <h3 class="product-title" style="text-align:center;margin-top:20px;font-weight:bold"><?= $datos[$i]['name']; ?></h3>
                                 <!-- <p class="product-price" style="text-align:center;">$49.99</p> -->
                                 <p style="text-align: center;">
-                                    <input class="btn btn-primary" style="width:200px" type="submit" value="Select">
+                                    <input class="btn btn-primary" style="width:200px" type="submit" value="Seleccionar">
                                 </p>
                             </div>
                         </form>
-
                     </div>
                 </div>
-
                 <?php $i++;
                     endforeach; ?>
-                <!-- Single Product -->
-
             </div>
         </div>
     </section>

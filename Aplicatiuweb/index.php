@@ -41,7 +41,7 @@
                 <div class="container py-5">
                     <h1 class="h1White">Da vida a tus pensamientos</h1>
                     <p class="col-lg-8 mx-auto lead pWhite">
-                    ¡Transforma tus recuerdos en obras maestras únicas con nuestro servicio de Arte Personalizado con Inteligencia Artificial.
+                    ¡Transforma tus pensamientos en obras maestras únicas con nuestro servicio de Arte Personalizado con Inteligencia Artificial.
                     </p>
                     <button class="glow-on-hover">Empezar a crear</button>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-8 col-lg-6 pt-2">
                     <div class="header">
                         <h1 class="h1-center-black">Productos populares</h1>
-                        <p class="p-center-black">Explora nuestro catálogo hoy y da vida a tus recuerdos con arte personalizado. ¡Cada producto es una oportunidad para expresar tu creatividad única!</p>
+                        <p class="p-center-black">Explora nuestro catálogo hoy y da vida a tus pensamientos con arte personalizado. ¡Cada producto es una oportunidad para expresar tu creatividad única!</p>
                     </div>
                 </div>
             </div>
