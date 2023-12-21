@@ -1,81 +1,102 @@
-<?php session_start(); ?>
-<head>
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+    require_once "Controladors/producteControl.php"; 
+    require_once "Vistes/navbar.php";
+    require_once "Model/producteModel.php";  
+    ?>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
     <title>VirtualVision</title>
     <link href="Vistes/css/style.css" rel="stylesheet">
-    
     <style>
-         .carousel-item img {
-        width: 100%; /* Ajusta el ancho a 100% del contenedor */
-        height: 600px; /* Establece la altura fija deseada */
-        object-fit: cover;
-        /* Ajusta la imagen a la altura */
-        }
-=======
-        .carousel-item img {
-            width: 100%;
-            /* Ajusta el ancho a 100% del contenedor */
-            height: 600px;
-            /* Establece la altura fija deseada */
-            object-fit: cover;
-            /* Ajusta la imagen a la altura */
-        }
+            #homeProducts{
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+            .h1-center-black{
+                text-align: center;
+                font-weight: bold;
+                color: black;
+            }
 
+            .p-center-black{
+                text-align: center;
+            }
 
-        /* Cambiar el color de los íconos de Previous y Next a negro */
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: #000;
-            /* Cambiar el color a negro (código hexadecimal) */
-        }
+            .center{
+                margin-top: 20px;
+                text-align: center;
+            }
 
-        /* Cambiar el color de los íconos de Previous y Next a negro */
-        .carousel-control-prev-icon::before,
-        .carousel-control-next-icon::before {
-            color: #000;
-            /* Cambiar el color a negro (código hexadecimal) */
-        }
     </style>
 
 </head>
 
-<?php include 'Vistes/navbar.php'; ?>
+
 
 <body>
-    <!-- CARROUSSEL -->
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/img1.jpg" class="d-block mx-auto img-fluid h-20" alt="Imagen 1">
-            </div>
-            <div class="carousel-item">
-                <img src="img/img2.jpg" class="d-block mx-auto img-fluid h-20" alt="Imagen 2">
-            </div>
-            <div class="carousel-item">
-                <img src="img/img3.jpg" class="d-block mx-auto img-fluid h-20" alt="Imagen 3">
-            </div>
-            <!-- Agrega más elementos .carousel-item para más imágenes -->
-        </div>
-        <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
 
-    <div class="text-center p-4 bg-secondary">
-    <div class="d-flex flex-column align-items-center">
-        <p class="display-4">Transforma tu deseo en realidad hoy</p>
-        <a href="Vistes/choose.php" class="btn btn-primary btn-lg">Prueba gratis</a>
+    <section id="sesionStartImage">
+        <div class="my-5">
+            <div class="p-5 text-center">
+                <div class="container py-5">
+                    <h1 class="h1White">Da vida a tus pensamientos</h1>
+                    <p class="col-lg-8 mx-auto lead pWhite">
+                    ¡Transforma tus recuerdos en obras maestras únicas con nuestro servicio de Arte Personalizado con Inteligencia Artificial.
+                    </p>
+                    <button class="glow-on-hover">Empezar a crear</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php 
+      $modeloProducto = new Product();
+
+      //Cargar datos de la base de datos en array
+      $datos = $modeloProducto->obtenerTodosLimite();
+
+     
+    ?>
+    <section id="homeProducts" class="section-products pt-3">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8 col-lg-6 pt-2">
+                    <div class="header">
+                        <h1 class="h1-center-black">Productos populares</h1>
+                        <p class="p-center-black">Explora nuestro catálogo hoy y da vida a tus recuerdos con arte personalizado. ¡Cada producto es una oportunidad para expresar tu creatividad única!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <?php
+                    $i = 0;
+                    foreach ($datos as $dat) : ?>
+                <div class="col-md-6 col-lg-4 col-xl-4" id="product">
+                    <div id="product-1" class="single-product" style="border-radius: 10px;overflow: hidden;overflow: hidden;box-shadow: 3px 4px 15px #00000026;margin-bottom: 20px;">
+                        <form action="../Controladors/producteControl.php?id=<?php echo $datos[$i]['id'] ?>"
+                            method="post">
+
+                            <div class="part-1" style="background-color:white;">
+                                <img src="<?= $datos[$i]['thumb']; ?>" alt="" style="text-align:center !important;display: flex;justify-content: center;align-items: center; width:100%;height:100%">
+                            </div>
+                            <div class="part-2" ">
+                                <h3 class="product-title" style="text-align:center;margin-top:20px;font-weight:bold"><?= $datos[$i]['name']; ?></h3>
+                                <!-- <p class="product-price" style="text-align:center;">$49.99</p> -->
+                                <p style="text-align: center;">
+                                    <input class="btn btn-primary" style="width:200px" type="submit" value="Seleccionar">
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <?php $i++;
+                    endforeach; ?>
+            </div>
+        </div>
+    </section>
+  
+
+
     </div>
-</div>
 
 
 
