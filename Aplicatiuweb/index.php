@@ -8,24 +8,7 @@
     <title>VirtualVision</title>
     <link href="Vistes/css/style.css" rel="stylesheet">
     <style>
-            #homeProducts{
-                margin-top: 40px;
-                margin-bottom: 40px;
-            }
-            .h1-center-black{
-                text-align: center;
-                font-weight: bold;
-                color: black;
-            }
-
-            .p-center-black{
-                text-align: center;
-            }
-
-            .center{
-                margin-top: 20px;
-                text-align: center;
-            }
+        
 
     </style>
 
