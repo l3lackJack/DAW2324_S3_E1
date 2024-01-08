@@ -60,7 +60,5 @@ class Product {
 
     public function printArray($array){
         echo '<pre>'; print_r($array); echo '</pre>';
-    }
-
-    
+    }    
 }

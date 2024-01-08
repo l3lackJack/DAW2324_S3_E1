@@ -4,8 +4,6 @@ from typing import List
 import mysql.connector
 import requests
 
-
-
 app = FastAPI()
 
 # Definir el modelo de datos para un producto
@@ -61,34 +59,30 @@ def insertar_en_base_de_datos(productos):
             host = "localhost",
             port = "3306"
             )
-        print("Conexion correcta")
 
         cursor = conn.cursor()
 
         cursor.execute("""DROP TABLE IF EXISTS productos""")
         cursor.execute("""DROP TABLE IF EXISTS imagenes""")
-        print("Eliminando tablas")
         # Crear tabla de productos (ajusta según la estructura de tus productos)
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS productos (
                 id INTEGER PRIMARY KEY,
                 name VARCHAR(255) NULL,
                 price DOUBLE NULL,
+                description VARCHAR(255) NULL,
                 sku VARCHAR(255) NULL,
                 type VARCHAR(255) NULL,
                 variants INTEGER NULL,
                 dpi INTEGER NULL
                 )
         """)
-        print("Create correcto")
         # Insertar productos en la tabla
         for producto in productos['data']:
             sql = "INSERT INTO productos(id, name, sku, type, variants, dpi) VALUES (%s, %s, %s, %s, %s, %s)"
             val = (producto['id'], producto['name'], producto['sku'], producto['type'], producto['variants'], producto['dpi'])
             cursor.execute(sql,val)
        
-        print("Insert correcto")
-
         # Confirmar los cambios
         conn.commit()
 
@@ -100,19 +94,18 @@ def insertar_en_base_de_datos(productos):
                 thumb VARCHAR(255)
                 )
         """)
-        print("create2 correcto")
         for producto in productos['data']:
             sql = "INSERT INTO imagenes (id, producto_id, original, thumb) VALUES (%s, %s, %s, %s)"
             val = (producto['images'][0]['id'], producto['id'], producto['images'][0]['thumb'], producto['images'][0]['original'])
             cursor.execute(sql,val)
         
-        print("insert2 correcto")
         conn.commit()
 
         conn.close()
         print("Productos insertados en la base de datos con éxito.")
     except Exception as e:
         print(f"Error al insertar productos en la base de datos: {e}")
+
 
 # Ruta para obtener productos de la API y luego insertarlos en la base de datos
 @app.get("/obtener_productos_y_guardar")
@@ -127,5 +120,6 @@ def obtener_productos_y_guardar():
     else:
         raise HTTPException(status_code=500, detail="Error al obtener productos de la API.")
 
-# Puedes ejecutar la aplicación con el siguiente comando
+
+# se puede ejecutar la aplicación con el siguiente comando
 # uvicorn nombre_del_archivo:app --reload

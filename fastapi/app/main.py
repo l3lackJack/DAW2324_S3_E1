@@ -67,7 +67,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         # Decodificar el token y obtener la información del usuario
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
-    except JWTError:
+    except Exception as e:
         # Capturar errores relacionados con el token
         raise credentials_exception
     
