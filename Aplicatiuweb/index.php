@@ -5,17 +5,12 @@
     ?>
 
 <head>
-    <title>VirtualVision</title>
+    <title>CustomAize</title>
     <link href="Vistes/css/style.css" rel="stylesheet">
     <style>
-        
-
     </style>
 
 </head>
-
-
-
 <body>
 
     <section id="sesionStartImage">
@@ -26,7 +21,7 @@
                     <p class="col-lg-8 mx-auto lead pWhite">
                     ¡Transforma tus pensamientos en obras maestras únicas con nuestro servicio de Arte Personalizado con Inteligencia Artificial.
                     </p>
-                    <button class="glow-on-hover">Empezar a crear</button>
+                    <button class="glow-on-hover"><a href="" style="color:black;">Empezar a crear</a></button>
                 </div>
             </div>
         </div>

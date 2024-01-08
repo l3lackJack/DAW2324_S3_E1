@@ -10,7 +10,7 @@
 
     <footer class="bg-primary text-white py-3 mt-auto">
         <div class="container text-center">
-            <p class="mb-0">&copy; <?php echo date("Y"); ?> VirtualVision. Todos los derechos reservados.</p>
+            <p class="mb-0">&copy; <?php echo date("Y"); ?> CustomAize. Todos los derechos reservados.</p>
         </div>
     </footer>
 
