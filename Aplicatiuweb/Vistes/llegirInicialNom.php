@@ -12,7 +12,7 @@ if (isset($_SESSION['usuario_nombre'])) {
     $usuario_nombre = $_SESSION['usuario_nombre'];
 
     // Consulta SQL para obtener el nombre del usuario
-    $sql = "SELECT username FROM clients WHERE username = :usuario_nombre";
+    $sql = "SELECT name FROM clients WHERE name = :usuario_nombre";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':usuario_nombre', $usuario_nombre, PDO::PARAM_STR);
     $stmt->execute();
@@ -21,7 +21,7 @@ if (isset($_SESSION['usuario_nombre'])) {
 
     if ($result) {
         // Obtener el nombre del usuario
-        $nombre_usuario = $result["username"];
+        $nombre_usuario = $result["name"];
 
         // Obtener la inicial del nombre
         $inicial = strtoupper(substr($nombre_usuario, 0, 1));
