@@ -3,7 +3,7 @@ session_start();
 
 // Prompt button
 if (isset($_POST['promptButton'])) {
-    $topic = $_POST['promptText'];
+    $topic = htmlspecialchars($_POST['promptText']);
     if (empty($_SESSION['promptList'])){
         $_SESSION['promptList'] = array();
     }
@@ -26,16 +26,25 @@ if (isset($_POST['promptButton'])) {
     if ($result === false) {
         echo 'Error';
     } else {
-        $imagesUrls = $result;
-        $_SESSION['imagesUrls'] = json_decode($imagesUrls, true);
+        $_SESSION['imagesUrls'] = [];
+        $_SESSION['imagesUrls'] = json_decode($result, true);
     }
 
     header("Location: /Vistes/imageChoose.php");
+}
+
+
+if(isset($_POST['saveButton'])) {
+    var_dump(1);
 }
 
 // Reset button
 if (isset($_POST['resetButton'])) {
     unset($_SESSION['promptList']);
     unset($_SESSION['imagesUrls']);
+    header("Location: /Vistes/imagePrompt.php");
+}
+
+if (isset($_POST['tryAgainChoose'])){
     header("Location: /Vistes/imagePrompt.php");
 }

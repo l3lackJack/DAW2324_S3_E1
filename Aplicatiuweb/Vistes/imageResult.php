@@ -2,9 +2,9 @@
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,11 @@ session_start();
 
 
 </head>
-<?php include 'navbar.php'; ?>
 
 <body>
-    <!--  NAVBAR  -->
-    
+    <?php include 'navbar.php'; ?>
+
+
 
     <!--  MAIN  -->
     <section class="text-center container">
@@ -33,9 +33,16 @@ session_start();
                 </div>
 
                 <form class="mt-2" method="post" action="/Controladors/imageController.php">
-                    <button name="resetButton" id="resetButton" type="submit" href="/Vistes/imagePrompt.php" class="btn btn-secondary mx-3">Reset Process</button>
-                    <button type="submit" class="btn btn-primary">Add to cart</button>
-                </p>
+                    <button name="resetButton" id="resetButton" type="submit" href="/Vistes/imagePrompt.php"
+                        class="btn btn-secondary mx-3">Reset Process</button>
+                        <?php
+                        if (isset($_SESSION['usuario_id'])) {
+                            echo '<button name="saveButton" id="saveButton" type="submit" class="btn btn-primary">Save</button>';
+                        }else {
+                            echo '<button name="saveButton" id="saveButton" type="submit" class="btn btn-primary">LogIn & Save</button>';
+                        }
+                        ?>
+                    </p>
             </div>
         </div>
     </section>
@@ -48,13 +55,16 @@ session_start();
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">History</h5>
+                            <div>
+
+                            </div>
                             <?php
                             $promptList = $_SESSION['promptList'];
                             foreach ($promptList as $i => $prompt) {
-                                echo '<p class="card-text border rounded bg-secondary text-white p-2" style="max-width: 750px;">'.$prompt.'</p>';
+                                echo '<p class="card-text border rounded bg-secondary text-white p-2" style="max-width: 750px;">' . $prompt . '</p>';
                             }
                             ?>
-                            
+
                         </div>
                         <div class="card-body">
                             <form method="post" action="imageController.php"
