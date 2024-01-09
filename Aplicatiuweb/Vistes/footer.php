@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- Tu código del head aquí -->
+    <link rel="stylesheet" href="css/navbar_footer.css">
 </head>
 
 <body style="min-height: 100vh; display: flex; flex-direction: column;">
