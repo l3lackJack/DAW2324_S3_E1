@@ -89,26 +89,35 @@ $mostrarSoloInicioSesion = false;
 
         <!-- Formulario -->
         <form method="post" action="/Controladors/procesar_registre.php" id="registre-form" onsubmit="return validarFormulari()">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="usuari" name="usuari" placeholder="Nombre de usuario">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Nombre@ejemplo.com">
-            </div>
-            <div class="mb-3">
-                <label for="contraseña" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Escriba su contraseña">
-            </div>
-            <div class="mb-3">
-                <label for="ccontraseña" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="Escriba su contraseña de nuevo">
-            </div>
-            <div class="text-center">
-            <button type="submit" class="btn btn-primary">Crear cuenta</button>
-            </div>
-        </form>
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Su nombre">
+    </div>
+    <div class="mb-3">
+        <label for="apellidos" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Sus apellidos">
+    </div>
+    <div class="mb-3">
+    <label for="username" class="form-label">Nombre de Usuario</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario">
+</div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Nombre@ejemplo.com">
+    </div>
+    <div class="mb-3">
+        <label for="contraseña" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Escriba su contraseña">
+    </div>
+    <div class="mb-3">
+        <label for="ccontraseña" class="form-label">Confirmar Contraseña</label>
+        <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="Escriba su contraseña de nuevo">
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Crear cuenta</button>
+    </div>
+</form>
     </div>
     </main>
 
