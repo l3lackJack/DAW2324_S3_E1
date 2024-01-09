@@ -1,0 +1,10 @@
+nav{
+    background-color: #061F41;
+    color:#00c6ce;
+    z-index: 999999;
+}
+footer{
+    background-color: #061F41;
+    color:#00c6ce;
+    z-index: 2;
+}
