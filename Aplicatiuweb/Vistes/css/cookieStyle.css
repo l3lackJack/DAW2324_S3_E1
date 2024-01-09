@@ -23,6 +23,7 @@ body {
 }
 .wrapper.show {
   right: 20px;
+  z-index: 100;
 }
 .wrapper header {
   display: flex;
