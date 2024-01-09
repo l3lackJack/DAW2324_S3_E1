@@ -31,10 +31,14 @@ footer{
 }
 
 .content {
-    margin-left: 250px; /* Ajusta esto según el ancho de la barra lateral */
+    margin-left: 290px; /* Ajusta esto según el ancho de la barra lateral */
+    margin-top: 25px;
+    width: 50%;
     padding: 20px;
     align-items: center;
-    color: #061f41;
+    background-color: #061f41;
+    color: #00c6ce;
+    border-radius: 15px;
 }
 
 .sidebar a {
@@ -63,7 +67,7 @@ footer{
 
 .profile-container {
     margin-top: 20px;
-    color: #061f41;
+    color: #00c6ce;
 }
 .overlay {
     display: none;
@@ -92,17 +96,39 @@ footer{
 .update-datos h2 {
     margin-bottom: 20px;
 }
+.borrar_cuenta{
+    width: 20%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #f03131;
+    border-radius: 8px;
+}
+.update-datos{
+    background-color: #00c6ce;
+    color: #061f41;
+    border: #061f41;
+    border-style: solid;
+    
+}
+.update{
+    width: 100%;
+}
 .glow-on-hover {
-    width: 15%;
+    width: 20%;
     height: 40px;
     border: none;
     outline: none;
-    color: #fff;
-    background: #061f41;
+    color: #061f41;
+    background: #00c6ce;
     cursor: pointer;
     position: relative;
     z-index: 0;
-    border-radius: 10px;
+    border-radius: 15px;
+}
+.glow-on-hover:hover{
+    color: white;
 }
 
 .glow-on-hover:before {
@@ -140,7 +166,7 @@ footer{
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #061f41;
+    background: #00c6ce;
     left: 0;
     top: 0;
     border-radius: 10px;
@@ -172,4 +198,6 @@ footer{
     align-self: flex-end;
     margin-top: 10%; /* Ajusta el margen superior según sea necesario */
     margin-right: -5%; /* Ajusta el margen derecho según sea necesario */
+    font-size: 18px;
+    color:#061f41;
 }

@@ -105,37 +105,27 @@ if(!isset($_SESSION['usuario_nombre'])) {
         <div class="content">
             <h1>Mis Datos</h1>
             <div class="profile-container">
-                
-                <?php
-                // Verificar si la variable $_GET['imagen'] está definida
-                if (isset($_GET['imagen'])) {
-                    $ruta_destino = htmlspecialchars(urldecode($_GET['imagen']), ENT_QUOTES, 'UTF-8');
-                    // Comprobar si la imagen existe
-                    echo '<img src="/Aplicatiuweb/img/fotos_perfil/' . basename($ruta_destino) . '" alt="Imagen de perfil" height="300" width="300">';
-                }
-                ?>
-
                 <p>Nombre: <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p>Apellido: <?php echo htmlspecialchars($_SESSION['usuario_apellidos'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p>Nombre de Usuario: <?php echo htmlspecialchars($_SESSION['usuario_username'] , ENT_QUOTES, 'UTF-8'); ?></p>
                 <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
 
                 <button type="button" class="glow-on-hover" onclick="toggleUpdateForm()">Actualizar Datos</button>
-
+                <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="borrar_cuenta">Borrar Cuenta</button>
                 <div class="overlay" id="overlay" onclick="cerrarUpdateForm()"></div>
                 <div class="update-datos" id="updateFormContainer" style="display: none;">
                     <h2>Actualizar Datos</h2>
                     <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
                         <div class="mb-3 justify-content-center">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <label for="nombre" class="form-label">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['usuario_username'], ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                         <div class="mb-3 justify-content-center">
                             <label for="email" class="form-label">Correo Electrónico</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
-                        <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="btn btn-danger end-0 me-5">Borrar Cuenta</button>
-
+                        <button type="submit" class="btn btn-primary update">Actualizar</button>
                         <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
                     </form>
                 </div>

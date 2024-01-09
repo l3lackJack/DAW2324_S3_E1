@@ -9,11 +9,11 @@ class UserController {
         $this->userModel = new User();
     }
 
-    public function actualizarUsuario($id, $nombre, $email) {
+    public function actualizarUsuario($id, $username, $email) {
         // Validar las datos antes de hacer cualquier operación
-        if ($this->validarDatos($nombre, $email)) {
+        if ($this->validarDatos($username, $email)) {
             // Actualizar el usuario en la base de datos
-            if ($this->userModel->actualizarUsuario($id, $nombre, $email)) {
+            if ($this->userModel->actualizarUsuario($id, $username, $email)) {
                 return true;
             } else {
                 return false;
@@ -23,9 +23,9 @@ class UserController {
         }
     }
 
-    private function validarDatos($nombre, $email) {
+    private function validarDatos($username, $email) {
         // Verificar que los campos no estén vacíos
-        if (!empty($nombre) && !empty($email)) {
+        if (!empty($username) && !empty($email)) {
             // Puedes implementar lógica adicional de validación aquí (longitud, formato de correo, etc.)
             return true; // retornar true si los datos son válidos
         } else {
@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if (isset($_SESSION['usuario_id'])) {
             $id = $_SESSION['usuario_id'];
-            $nuevoNombre = $_POST['nombre'];
+            $nuevoNombre = $_POST['username'];
             $nuevoEmail = $_POST['email'];
 
             $userController = new UserController();
 
             if ($userController->actualizarUsuario($id, $nuevoNombre, $nuevoEmail)) {
                 // Actualizar las variables de sesión con los nuevos valores
-                $_SESSION['usuario_nombre'] = $nuevoNombre;
+                $_SESSION['usuario_username'] = $nuevoNombre;
                 $_SESSION['usuario_email'] = $nuevoEmail;
 
                 // Redirigir a la página de perfil con un mensaje de éxito

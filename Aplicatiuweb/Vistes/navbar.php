@@ -49,7 +49,6 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
                     <li><a class="dropdown-item" href="/Vistes/perfil.php">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/Vistes/perfil_actualitzarDades.php">Configuración</a></li>
                     <li>
                         <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
                             <button type="submit" id="cerrar_sesion" name="cerrar_sesion" class="btn text-danger">Cerrar Sesión</button>
