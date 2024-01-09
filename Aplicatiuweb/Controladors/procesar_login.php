@@ -21,7 +21,7 @@ class ControladorLogin {
                     $valor = true; //s'usará per a que posteriorment desaparegue "Iniciar sessión" del header hi aparegue perfil
                     $_SESSION['loggedin'] = $valor;
                     $_SESSION['usuario_id'] = $infousuari['idClient'];
-                    $_SESSION['usuario_nombre'] = $infousuari['name'];
+                    $_SESSION['usuario_nombre'] = $infousuari['username'];
                     $_SESSION['usuario_email'] = $email;
                     
                 }
