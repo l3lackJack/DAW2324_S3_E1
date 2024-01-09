@@ -48,7 +48,7 @@ require_once "dataBaseCon.php";
     }
 
     public function recuperarInfoUsuari($email) {
-        $query = "SELECT idClient, username FROM clients WHERE mail = :email";
+        $query = "SELECT idClient, name FROM clients WHERE mail = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
