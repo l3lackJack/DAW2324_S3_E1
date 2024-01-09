@@ -10,7 +10,11 @@ if(!isset($_SESSION['usuario_nombre'])) {
 <?php include 'navbar.php';?>
 
 <head>
-    <script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/bootstrap/css/perfil.scss">
+<script>
         function validarFormulario() {
             var nombre = document.getElementById('nombre').value.trim();
             var email = document.getElementById('email').value.trim();
@@ -46,18 +50,25 @@ if(!isset($_SESSION['usuario_nombre'])) {
         }
 
         function toggleUpdateForm() {
+            var overlay = document.getElementById('overlay');
             var updateFormContainer = document.getElementById('updateFormContainer');
-            updateFormContainer.style.display = (updateFormContainer.style.display === 'none') ? 'block' : 'none';
+            overlay.style.display = 'block';
+            updateFormContainer.style.display = 'block';
         }
-    </script>
 
-    <script>
+        function cerrarUpdateForm() {
+            var overlay = document.getElementById('overlay');
+            var updateFormContainer = document.getElementById('updateFormContainer');
+            overlay.style.display = 'none';
+            updateFormContainer.style.display = 'none';
+        }
+
         function toggleDropdown() {
             var dropdownMenu = document.getElementById('dropdownMenu');
             dropdownMenu.classList.toggle('show');
         }
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (!event.target.matches('.dropdown-toggle')) {
                 var dropdowns = document.getElementsByClassName('dropdown-menu');
                 for (var i = 0; i < dropdowns.length; i++) {
@@ -84,11 +95,6 @@ if(!isset($_SESSION['usuario_nombre'])) {
                 <li class="nav-item">
                     <a href="#mis-datos">Mis Datos</a>
                 </li>
-                <li>
-                    <form class="cerrar-session" method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
-                        <button type="submit" id="cerrar_sesion" name="cerrar_sesion" class="btn btn-secondary logout-btn">Cerrar Sesión</button>
-                    </form>
-                </li>
             </ul>
         </div>
 
@@ -108,16 +114,17 @@ if(!isset($_SESSION['usuario_nombre'])) {
                 <p>Nombre: <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?></p>
                 <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
 
-                <button type="button" class="btn btn-primary" onclick="toggleUpdateForm()">Actualizar Datos</button>
+                <button type="button" class="glow-on-hover" onclick="toggleUpdateForm()">Actualizar Datos</button>
 
-                <div id="updateFormContainer" style="display: none;">
+                <div class="overlay" id="overlay" onclick="cerrarUpdateForm()"></div>
+                <div class="update-datos" id="updateFormContainer" style="display: none;">
                     <h2>Actualizar Datos</h2>
                     <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
-                        <div class="mb-3">
+                        <div class="mb-3 justify-content-center">
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 justify-content-center">
                             <label for="email" class="form-label">Correo Electrónico</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
