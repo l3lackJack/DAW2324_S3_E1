@@ -1,9 +1,8 @@
-# Importar los módulos necesarios
 from typing import Union
 import base64
 import requests
 from fastapi import FastAPI, Depends, HTTPException, status
-from jose import JWTError, jwt
+from jwt import jwt
 from fastapi.security import OAuth2PasswordBearer 
 from dotenv import load_dotenv
 import os
@@ -11,6 +10,7 @@ from fastapi import Form
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from pydantic import BaseModel
+
 # Carregar les variables d'entorn des de l'arxiu .env
 load_dotenv()
 
@@ -67,7 +67,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         # Decodificar el token y obtener la información del usuario
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
-    except JWTError:
+    except Exception as e:
         # Capturar errores relacionados con el token
         raise credentials_exception
     
@@ -148,4 +148,3 @@ async def generateImages(request_data: RequestData):
     }
 
     return response["data"]
-    

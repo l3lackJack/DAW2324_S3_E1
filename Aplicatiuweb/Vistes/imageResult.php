@@ -34,7 +34,7 @@ session_start();
 
                 <form class="mt-2" method="post" action="/Controladors/imageController.php">
                     <button name="resetButton" id="resetButton" type="submit" href="/Vistes/imagePrompt.php" class="btn btn-secondary mx-3">Reset Process</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Add to cart</button>
                 </p>
             </div>
         </div>
