@@ -45,6 +45,7 @@ footer{
     background-color: #061f41;
     color: #00c6ce;
     border-radius: 15px;
+    box-shadow: 5px 10px 10px #00c7ceb4;
 }
 .content-1 {
     margin-left: 20px; /* Ajusta esto según el ancho de la barra lateral */
@@ -56,6 +57,7 @@ footer{
     color: #00c6ce;
     border-radius: 15px;
     text-align: center;
+    box-shadow: 5px 10px 10px #00c7ceb4;
 }
 
 .sidebar a {
