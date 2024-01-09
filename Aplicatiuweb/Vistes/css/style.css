@@ -149,8 +149,10 @@ a:hover {
 
 
 #sesionStartImage{
-    background-image: url(../img/imgHome/concepto-nube-ai-brazo-robotico.jpg);
+    /* background-image: url(../img/imgHome/concepto-nube-ai-brazo-robotico.jpg); */
+    background-image: url(../img/imgHome/animacionInicio.gif);
     background-size: auto;
+    height: 600px;
     background-repeat: no-repeat;
     background-position: 55% 55%;
     border: 0;
