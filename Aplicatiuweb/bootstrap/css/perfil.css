@@ -1,24 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
 body, html {
     height: 100%;
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
-nav{
-    background-color: #061f41;
-    color: #00c6ce;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 2;
-}
+
 .container a{
     color:#00c6ce;
     text-decoration: none;
 }
-footer{
-    background-color: #061f41;
-    color: #00c6ce;
-    z-index: 2;
-}
+
 .sidebar{
     width: 250px;
     min-width: 200px;
