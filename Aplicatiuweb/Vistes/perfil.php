@@ -83,29 +83,29 @@ if(!isset($_SESSION['usuario_nombre'])) {
 </head>
 
 <body>
-        <div class="sidebar">
-    <div class="sidebar-content">
-        <div class="perfil-container">
-            <?php include 'llegirInicialNom.php'; ?> 
-            <div class="mi-perfil">
-                <a href="#">Mi Perfil</a>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <div class="perfil-container">
+                <?php include 'llegirInicialNom.php'; ?> 
+                <div class="mi-perfil">
+                   <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>!</p>
+                </div>
             </div>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+                <h4>Mi Cuenta</h4>
+                <li class="nav-item">
+                    <a href="#mis-datos">Mis Datos</a>
+                    <a href="">Mis Pedidos</a>
+                </li>
+            </ul>
         </div>
-        <hr>
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a href="#mis-datos">Mis Datos</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
     </div>
 
         <div class="content">
+            <h1>Mis Datos</h1>
             <div class="profile-container">
-                <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
-
+                
                 <?php
                 // Verificar si la variable $_GET['imagen'] está definida
                 if (isset($_GET['imagen'])) {

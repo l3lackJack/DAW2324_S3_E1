@@ -4,16 +4,28 @@ body, html {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
-
-.sidebar {
+nav{
+    background-color: #061f41;
+    color: #00c6ce;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.container a{
+    color:#00c6ce;
+    text-decoration: none;
+}
+footer{
+    background-color: #061f41;
+    color: #00c6ce;
+}
+.sidebar{
     width: 250px;
     min-width: 200px;
-    background-color: #061f41;
+    background-color: #00c6ce;
     padding: 20px;
     box-sizing: border-box;
     height: 100%;
     position: fixed;
-    margin-top: 3.8%;
+    margin-top: 3.6%;
     display: flex;
     flex-direction: column;
 }
@@ -21,12 +33,14 @@ body, html {
 .content {
     margin-left: 250px; /* Ajusta esto según el ancho de la barra lateral */
     padding: 20px;
+    align-items: center;
+    color: #061f41;
 }
 
 .sidebar a {
     text-decoration: none;
-    color: #00c6ce;
-    font-size: 18px;
+    color: #061f41;
+    font-size: 14px;
     display: block;
     margin-bottom: 15px;
 }
@@ -37,19 +51,19 @@ body, html {
     align-items: flex-start; /* Ajusta según sea necesario */
 }
 .sidebar-content hr{
-    color: #00c6ce;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    margin-top: 0;
+    margin-bottom: 5;
 }
-
 .sidebar a:hover {
-    color: #007bff;
+    color:white;
 }
 
 .profile-container {
     margin-top: 20px;
-}
-
-.logout-btn {
-    margin-top: 150%;
+    color: #061f41;
 }
 .overlay {
     display: none;
@@ -136,12 +150,13 @@ body, html {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
-}.round-icon {
+}
+.round-icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #3498db;
-    color: #ffffff;
+    background-color: #5857AA;
+    color: white;
     font-size: 24px;
     text-align: center;
     line-height: 175%;
@@ -155,6 +170,6 @@ body, html {
 
 .mi-perfil {
     align-self: flex-end;
-    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
-    margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
+    margin-top: 10%; /* Ajusta el margen superior según sea necesario */
+    margin-right: -5%; /* Ajusta el margen derecho según sea necesario */
 }
