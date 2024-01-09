@@ -10,11 +10,6 @@ from fastapi import Form
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from pydantic import BaseModel
-<<<<<<< HEAD
-
-=======
-from openai import OpenAI
->>>>>>> origin/image
 # Carregar les variables d'entorn des de l'arxiu .env
 load_dotenv()
 
@@ -144,24 +139,6 @@ async def generateImages(request_data: RequestData):
 
     except Exception as e:
     # API RESPONSE SIMULATION
-<<<<<<< HEAD
-    response = {
-        "created": 1699298517,
-        "data": [
-            {
-                "url": "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699833600&semt=sph"
-            },
-            {
-                "url": "https://img.freepik.com/premium-photo/mountain-lake-with-mountain-background_931553-20878.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=sph"
-            },
-            {
-                "url": "https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_640.jpg"
-            }
-        ]
-    }
-
-    return response["data"]
-=======
         print(e)
         response = {
             "created": 1699298517,
@@ -179,4 +156,3 @@ async def generateImages(request_data: RequestData):
         }
     return response["data"]
     
->>>>>>> origin/image
