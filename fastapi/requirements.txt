@@ -6,5 +6,3 @@ python-dotenv==0.18.0
 python-jose[pyjwt]
 python-multipart==0.0.5
 openai==1.0.1
-
-
