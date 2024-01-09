@@ -16,15 +16,15 @@ if(!isset($_SESSION['usuario_nombre'])) {
 <link rel="stylesheet" href="/bootstrap/css/perfil.scss">
 <script>
         function validarFormulario() {
-            var nombre = document.getElementById('nombre').value.trim();
+            var nombre = document.getElementById('username').value.trim();
             var email = document.getElementById('email').value.trim();
 
-            document.getElementById('nombre').style.backgroundColor = 'white';
+            document.getElementById('username').style.backgroundColor = 'white';
             document.getElementById('email').style.backgroundColor = 'white';
 
             if (nombre === '') {
                 mostrarError('Por favor, complete el campo Nombre.');
-                document.getElementById('nombre').style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+                document.getElementById('username').style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
                 return false;
             }
 
@@ -96,12 +96,20 @@ if(!isset($_SESSION['usuario_nombre'])) {
                 <h4>Mi Cuenta</h4>
                 <li class="nav-item">
                     <a href="#mis-datos">Mis Datos</a>
-                    <a href="">Mis Pedidos</a>
+                    <a href="">Mis Direcciones</a>
+                </li>
+            </ul>
+            <hr>
+            <ul class="nav nav-pills flex-column">
+                <h4>Mis Pedidos</h4>
+                <li class="nav-item">
+                    <a href="">Pedidos</a>
+                    <a href="">Pedidos cancelados</a>
                 </li>
             </ul>
         </div>
     </div>
-
+        <div class="container-perfil">
         <div class="content">
             <h1>Mis Datos</h1>
             <div class="profile-container">
@@ -111,11 +119,12 @@ if(!isset($_SESSION['usuario_nombre'])) {
                 <p>Correo Electrónico: <?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?></p>
 
                 <button type="button" class="glow-on-hover" onclick="toggleUpdateForm()">Actualizar Datos</button>
-                <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="borrar_cuenta">Borrar Cuenta</button>
+
                 <div class="overlay" id="overlay" onclick="cerrarUpdateForm()"></div>
                 <div class="update-datos" id="updateFormContainer" style="display: none;">
-                    <h2>Actualizar Datos</h2>
+                    <h2>Configuración de la Cuenta</h2>
                     <form method="post" action="/Controladors/controlador_perfil.php" onsubmit="return validarFormulario()">
+                        <h5>Actualizar Datos</h5>
                         <div class="mb-3 justify-content-center">
                             <label for="nombre" class="form-label">Nombre de Usuario</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['usuario_username'], ENT_QUOTES, 'UTF-8'); ?>">
@@ -125,11 +134,30 @@ if(!isset($_SESSION['usuario_nombre'])) {
                             <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_SESSION['usuario_email'], ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
 
-                        <button type="submit" class="btn btn-primary update">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" id="cerrar_sesion" name="borrar_cuenta" class="btn btn-danger end-0 me-5">Borrar Cuenta</button>
+
                         <div id="mensaje-error" class="alert alert-danger" style="display: none;"></div>
                     </form>
                 </div>
             </div>
+            
+        </div>
+        <div class="content-1">
+            <h2>Pedidos en curso</h2>
+            <div class="profile-container-2">
+                <h3>0</h3>
+                <button class="pedidos">Mas información</button>
+            </div>
+            <hr>
+            <h2>Total pedidos</h2>
+            <div class="profile-container-2">
+                <h3>0</h3>
+                <button class="pedidos">Mas información</button>
+            </div>
+        </div>
+            
+        </div>
         </div>
 
     <?php include 'footer.php'; ?>
