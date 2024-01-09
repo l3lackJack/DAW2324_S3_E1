@@ -175,7 +175,7 @@ async def generateImages(request_data: RequestData):
 
 
 @app.get("/obtener_productos_y_guardar")
-async def obtener_productos_y_guardar(request_data: RequestData):
+def obtener_productos_y_guardar():
     # Obtener productos de la API
     productos = obtener_productos()
 
