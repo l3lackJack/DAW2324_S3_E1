@@ -1,19 +1,19 @@
-<?php 
-session_start(); //Iniciem sessió per manejar les variables de sessió
-require_once '../Model/user_class.php'; // Importem la classe d'usuari necessària
+<?php
+session_start();
+require_once '../Model/user_class.php';
 
 class UserController {
     private $userModel;
 
     public function __construct() {
-        $this->userModel = new User(); // Creem una instància del model d'usuari
+        $this->userModel = new User();
     }
-    // Mètode per actualitzar les dades de l'usuari
-    public function actualizarUsuario($id, $nombre, $email) {
-        // Validar les dades abans de fer cap operació
-        if ($this->validarDatos($nombre, $email)) {
-            // Actualitzem l'usuari a la base de dades
-            if ($this->userModel->actualizarUsuario($id, $nombre, $email)) {
+
+    public function actualizarUsuario($id, $username, $email) {
+        // Validar las datos antes de hacer cualquier operación
+        if ($this->validarDatos($username, $email)) {
+            // Actualizar el usuario en la base de datos
+            if ($this->userModel->actualizarUsuario($id, $username, $email)) {
                 return true;
             } else {
                 return false;
@@ -22,50 +22,43 @@ class UserController {
             return false;
         }
     }
-    // Mètode privat per validar les dades
-    private function validarDatos($nombre, $email) {
-        // Verifiquem que els camps no estiguin buits
-        if (!empty($nombre) && !empty($email)) {
-            // Podem implementar lògica addicional de validació aquí (longitud, format de correu, etc.)
-            return true; // tornar true si les dades son válides
+
+    private function validarDatos($username, $email) {
+        // Verificar que los campos no estén vacíos
+        if (!empty($username) && !empty($email)) {
+            // Puedes implementar lógica adicional de validación aquí (longitud, formato de correo, etc.)
+            return true; // retornar true si los datos son válidos
         } else {
-            return false; // si no, tornar false
+            return false; // si no, retornar false
         }
     }
 }
 
-// agafar la solicitud del formulari tipus post
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verificar si se ha enviat solicitud per a tancar sessió
     if (isset($_POST['cerrar_sesion'])) {
-        // Destruir la sessió
+        // Destruir la sesión
         session_destroy();
-        session_unset();
-        // Redirigir a la página de inic de sessió
+        // Redirigir a la página de inicio de sesión
         header("Location: /Vistes/login.php");
         exit();
-    } elseif (isset($_POST['borrar_cuenta'])) { //En cas de rebre borrar compte al formulari
-        // Eliminem el compte de l'usuari i redirigim a la pàgina de registre
-        $usuari = new User(); //instanciem la clase usuari
-        $borrarcuenta = $usuari->borrarCuenta($_SESSION['usuario_email']); //cridem al metode per borrar compte de la clase usuari
+    } elseif (isset($_POST['borrar_cuenta'])) {
+        $usuari = new User();
+        $borrarcuenta = $usuari->borrarCuenta($_SESSION['usuario_email']);
         session_destroy();
-        session_unset();
-        header("Location: /Vistes/registre.php"); //redirigim al registre ja que acabem de borrar el compte
+        // Redirigir a la página de registro u otra página
+        header("Location: /Vistes/registre.php");
         exit();
     } else {
-        // En cas de que hem rebut un post pero no es de borrar compte ni de tancar sessio, será de actualizar l'informació ja que només hi han estes 3 opcions
-        if (isset($_SESSION['usuario_id'])) { //verifiquem que l'usuari ha inciat sessió
+        if (isset($_SESSION['usuario_id'])) {
             $id = $_SESSION['usuario_id'];
-            $nuevoNombre = $_POST['nombre']; // Asignar el valor del formulari a $nuevoNombre
-            $nuevoEmail = $_POST['email']; // Asignar el valor del formulari a $nuevoEmail
+            $nuevoNombre = $_POST['username'];
+            $nuevoEmail = $_POST['email'];
 
-            // instanciem la clase per a posteriorment cridar el metode "actualitzarusuari"
             $userController = new UserController();
 
-            // Actualizar el usuari en la base de dades y verificar si la actualizació ha sigut existosa
             if ($userController->actualizarUsuario($id, $nuevoNombre, $nuevoEmail)) {
-                // Actualizar las variables de sesión amb els nous valors
-                $_SESSION['usuario_nombre'] = $nuevoNombre;
+                // Actualizar las variables de sesión con los nuevos valores
+                $_SESSION['usuario_username'] = $nuevoNombre;
                 $_SESSION['usuario_email'] = $nuevoEmail;
 
                 // Redirigir a la página de perfil con un mensaje de éxito

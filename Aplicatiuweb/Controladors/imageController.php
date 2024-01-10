@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -63,13 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['promptText']) && $_GET['action'] == 'topic') {
-        echo "hola";
         $_SESSION['topic'] = htmlspecialchars($_POST['promptText']);
         unset($_POST['promptText']);
 
         if (empty($_SESSION['promptList'])) {
             $_SESSION['promptList'] = array();
         }
+
         $api_url = 'http://fastapi:8000/generateImages';
 
         $options = [
@@ -82,9 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $context = stream_context_create($options);
         $result = file_get_contents($api_url, false, $context);
-        echo $result;
         if ($result === false) {
-
             echo 'Error en la solicitud a la API';
         } else {
             // Decodificar la respuesta JSON
