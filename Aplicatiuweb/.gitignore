@@ -1,7 +1,6 @@
 *.yml
 database
 fastapi/app/__pycache__/main.cpython-310.pyc
-=======
 Dockerfile
 *.pyc
 */__pycache__*
