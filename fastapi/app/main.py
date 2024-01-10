@@ -76,10 +76,10 @@ def insertar_en_base_de_datos(productos):
     try:
         # Conexión a mula base de datos
         conn = mysql.connector.connect(
+            host = "mariadb",
+            database="projectx",
             user="alumne",
             password="alumne1234",
-            database="projectx",
-            host = "localhost",
             port = "3306"
             )
 
