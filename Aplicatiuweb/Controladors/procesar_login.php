@@ -1,5 +1,5 @@
 <?php
-session_start(); // Iniciem sessió per manejar variables de sessió
+session_start(); //inciem sessió per manejar variables de sessió
 require_once '../Model/user_class.php';
 
 class ControladorLogin {
@@ -18,15 +18,14 @@ class ControladorLogin {
                 // El usuario fue autenticado correctamente
                 // Iniciar sesión y redirigirlo a la página de perfil
                 if ($infousuari) {
-                    $valor = true; // s'usará per a que posteriorment desaparegue "Iniciar sessión" del header hi aparegue perfil
+                    $valor = true; //s'usará per a que posteriorment desaparegue "Iniciar sessión" del header hi aparegue perfil
                     $_SESSION['loggedin'] = $valor;
-                    $_SESSION['usuario_username'] = $infousuari['username'];
-                    $_SESSION['usuario_id'] = $infousuari['idClient'];
-                    $_SESSION['usuario_nombre'] = $infousuari['name'];
-                    $_SESSION['usuario_apellidos'] = $infousuari['surnames']; // Añadido el apellido a la sesión
+                    $_SESSION['usuario_id'] = $infousuari['id'];
+                    $_SESSION['usuario_nombre'] = $infousuari['username'];
                     $_SESSION['usuario_email'] = $email;
+                    
                 }
-                header("Location: /Vistes/perfil.php"); // Redirige a la página de perfil después del inicio de sesión exitoso
+                header("Location: /Vistes/perfil.php");// Redirige a la página de perfil después del inicio de sesión exitoso
                 exit();
             } else {
                 // El usuario no fue autenticado correctamente
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contrasena = $_POST['contrasena'];
     // Instanciar el controlador y llamar al método logejar para manejar el inicio de sesión
     $controladorlogin = new ControladorLogin();
-    $controladorlogin->logejar($email, $contrasena);
+    $controladorlogin->logejar($email, $contrasena);   
 } else {
     echo("L'usuari o la contrasenya son incorrectes");
 }

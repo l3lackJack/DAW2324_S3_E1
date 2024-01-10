@@ -14,7 +14,7 @@ require_once "dataBaseCon.php";
 
     public function getAll() {
         
-        $query = 'SELECT * FROM clients';
+        $query = 'SELECT * FROM users';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
@@ -23,7 +23,7 @@ require_once "dataBaseCon.php";
 
     public function getById($id) {
 
-        $query = 'SELECT * FROM clients WHERE idClient = :id';
+        $query = 'SELECT * FROM users WHERE id = :id';
   
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -35,7 +35,7 @@ require_once "dataBaseCon.php";
    
     public function delete($id) {
         
-        $query = 'DELETE FROM clients WHERE idClient = :id';
+        $query = 'DELETE FROM users WHERE id = :id';
     
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -48,7 +48,7 @@ require_once "dataBaseCon.php";
     }
 
     public function recuperarInfoUsuari($email) {
-        $query = "SELECT * FROM clients WHERE mail = :email";
+        $query = "SELECT id, username FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -61,19 +61,15 @@ require_once "dataBaseCon.php";
         }
     }
 
-    public function registrarUsuario($nombre, $apellidos, $username, $email, $contrasena) {
-        // Hashear la contraseña antes de almacenarla
+    public function registrarUsuario($nombre, $email, $contrasena) {
         $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
-        
-        // Preparar la consulta SQL con los campos de nombre, apellidos, email, nombre de usuario y contraseña hasheada
-        $query = 'INSERT INTO clients (name, surnames, username, mail, password) VALUES (:nombre, :apellidos, :username, :email, :contrasena)';
+
+        $query = 'INSERT INTO users (username, email, password) VALUES (:nombre, :email, :contrasena)';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':apellidos', $apellidos);
-        $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':contrasena', $contrasenaHash);
-    
+
         // Ejecutar la consulta y verificar el resultado
         if ($stmt->execute()) {
             return true; // Éxito
@@ -81,23 +77,23 @@ require_once "dataBaseCon.php";
             return false; // Fallo
         }
     }
-    
-    
 
-    public function actualizarUsuario($id, $usuario, $email) {
-        $query = 'UPDATE clients SET username = :usuario, mail = :email WHERE idClient = :id';
+    public function actualizarUsuario($id, $nombre, $email) {
+        $query = 'UPDATE users SET username = :nombre, email = :email WHERE id = :id';
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':usuario', $usuario);
+        $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':id', $id);
-    
-        // Ejecutar la consulta y verificar el resultado
-        return $stmt->execute();
+        $stmt->bindParam(':id', $id);        
+
+        if ($stmt->execute()) {
+            return true; // Éxito
+        } else {
+            return false; // Fallo
+        }
     }
     
-    
     public function loginar($email, $contrasena) {
-        $query = "SELECT * FROM clients WHERE mail = :email";
+        $query = "SELECT id, username, password FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -110,7 +106,7 @@ require_once "dataBaseCon.php";
         }
     }
     public function borrarCuenta($email) {
-        $query = 'DELETE FROM clients WHERE mail = :email';
+        $query = 'DELETE FROM users WHERE email = :email';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
     

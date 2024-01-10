@@ -5,18 +5,8 @@
     ?>
 
 <head>
-<<<<<<< HEAD
     <title>CustomAize</title>
     <link href="Vistes/css/style.css" rel="stylesheet">
-=======
-<!DOCTYPE html>
-<html lang="en">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VirtualVision</title>
-    
->>>>>>> perfil
     <style>
     </style>
 

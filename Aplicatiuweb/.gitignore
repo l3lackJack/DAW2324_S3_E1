@@ -1,13 +1,2 @@
-*.yml
-database
-fastapi/app/__pycache__/main.cpython-310.pyc
-Dockerfile
-*.pyc
-*/__pycache__*
-*.pyc
-*/bootstrap/css/bootstrap*
-*/bootstrap/js/bootstrap*
-snippet*
-*/bootstrap/css/bootstrap*
-*/bootstrap/js/bootstrap*
-
+node_modules
+package-lock.json
